@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Python Version](https://img.shields.io/badge/Python-3.x-blue.svg)
-![Libraries](https://img.shields.io/badge/Libraries-Pandas%2CSklearn%2CStreamlit-brightgreen.svg)
+![Libraries](https://img.shields.io/badge/Libraries-Pandas%2CSklearn%2CStreamlit%2CMatplotlib%2CSeaborn%2CRandomizedSearchCV-brightgreen.svg)
 
 ## Overview
 
@@ -14,7 +14,7 @@ The project utilizes the "Accident-Data.csv" dataset, which contains information
 
 ## Key Features
 
-* **Data Preprocessing:** Handling missing values, encoding categorical features, and scaling numerical features.
+* **Data Preprocessing:** Handling missing values, unit conversion, datetime conversion and undersampling for balanced and clean training data
 * **Robust Model with Hyperparameter Tuning:** Implementation of the Random Forest Classifier, optimized using RandomizedSearchCV to find a good combination of hyperparameters for improved performance.
 * **Performance Evaluation:** Thorough evaluation of the model's predictive accuracy using metrics such as accuracy, precision, recall, and F1-score.
 * **Interactive Web Application:** A Streamlit application allows users to input accident parameters and receive severity predictions.
@@ -24,6 +24,7 @@ The project utilizes the "Accident-Data.csv" dataset, which contains information
 
 * **Python:** Programming language used for the entire project.
 * **Pandas:** For data manipulation and analysis.
+*  **Matplotlib and Seaborn:** For creating insightful data visualizations
 * **Scikit-learn (sklearn):** For data splitting, preprocessing, model implementation (Random Forest Classifier), and evaluation metrics.
 * **Streamlit:** For creating the interactive web application.
 
@@ -32,7 +33,7 @@ The project utilizes the "Accident-Data.csv" dataset, which contains information
 1.  **Clone the repository:**
 
     ```bash
-    git clone [https://github.com/Abhinav-Marlingaplar/Accident-Severity-Predictor.git](https://github.com/Abhinav-Marlingaplar/Accident-Severity-Predictor.git)
+    git clone https://github.com/Abhinav-Marlingaplar/Accident-Severity-Predictor.git
     cd Accident-Severity-Predictor
     ```
 
@@ -41,7 +42,7 @@ The project utilizes the "Accident-Data.csv" dataset, which contains information
     This project relies on the following Python libraries. Please ensure you have them installed in your environment. You can install them using pip:
 
     ```bash
-    pip install pandas scikit-learn streamlit
+    pip install requirements.txt
     ```
 
 ## Usage

@@ -207,4 +207,4 @@ if submitted:
         st.error(f"An unexpected error occurred during prediction: {e}")
 
 st.markdown("---")
-st.markdown("Built with ❤️ using Streamlit.")
+st.markdown("App built by Abhinav Marlingaplar.")

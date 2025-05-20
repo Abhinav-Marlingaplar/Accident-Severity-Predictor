@@ -58,18 +58,11 @@ The project utilizes the "Accident-Data.csv" dataset, which contains information
     The Streamlit application will open in your default web browser.  You can then interact with the application to get accident severity predictions.
 
 ### Sample Images of Streamlit Application
-
-<p align="left">
-<img src="images/img2.png" alt="moderate risk" width="400"/>
-</p>
-
-<p align="center">
-<img src="images/img1.png" alt="no risk" width="400"/>
-</p>
-
-<p align="right">
-<img src="images/img3.png" alt="high risk" width="400"/>
-</p>
+<div style="display: flex; justify-content: center;">
+    <img src="images/img2.png" alt="no risk" width="400"/>
+    <img src="images/img1.png" alt="moderate risk" width="400"/>
+    <img src="images/img3.png" alt="high risk" width="400"/>
+</div>
 
 ## Results
 

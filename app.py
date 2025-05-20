@@ -160,7 +160,7 @@ with st.form("accident_prediction_form", clear_on_submit=False): # changed clear
             help="Temperature in Celsius at the time of accident."
         )
         st.session_state.input_data["Traffic_Signal"] = st.checkbox("Traffic Signal Present?", value=st.session_state.input_data["Traffic_Signal"])
-        st.session_state.input_data["Crossing"] = st.checkbox("Crossing Present?", value=st.session_state.input_data["Crossing"], value=False)
+        st.session_state.input_data["Crossing"] = st.checkbox("Crossing Present?", value=st.session_state.input_data["Crossing"]) # Corrected line
 
     # Every form must have a submit button.
     submitted = st.form_submit_button("Predict Severity")

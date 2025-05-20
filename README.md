@@ -1,57 +1,64 @@
 # Accident Severity Prediction using Random Forest Classifier
 
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Python Version](https://img.shields.io/badge/Python-3.x-blue.svg)
+![Libraries](https://img.shields.io/badge/Libraries-Pandas%2CSklearn%2CStreamlit-brightgreen.svg)
+
 ## Overview
 
-This project aims to predict the severity of road traffic accidents using a Machine Learning approach. By analyzing various contributing factors, the model can classify accident severity levels, providing valuable insights for proactive road safety measures, optimizing emergency response, and resource allocation. The core of this solution is a **Random Forest Classifier**, chosen for its robustness, high accuracy, and ability to handle diverse datasets. A Streamlit web application is provided to demonstrate the model's predictive capabilities interactively.
-
-## Table of Contents
-
-- [Project Description](#project-description)
-- [Key Features](#key-features)
-- [Dataset](#dataset)
-- [Model & Methodology](#model--methodology)
-- [Evaluation Results](#evaluation-results)
-- [Project Structure](#project-structure)
-- [How to Run Locally](#how-to-run-locally)
-- [Live Demo (Optional - Add Link Here)](#live-demo-optional---add-link-here)
-- [Future Enhancements](#future-enhancements)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-
-## Project Description
-
-Road traffic accidents are a significant global concern, leading to severe human and economic consequences. Predicting the severity of these incidents can play a crucial role in mitigating their impact. This project addresses the challenge by developing a machine learning model that classifies accident severity based on factors such as environmental conditions, road characteristics, and other relevant features. The ultimate goal is to empower emergency services, policymakers, and urban planners with predictive insights to enhance road safety and optimize response strategies.
-
-## Key Features
-
--   **Accident Severity Prediction:** Utilizes a trained Random Forest Classifier to predict the severity level of an accident.
--   **Interactive Streamlit Application:** Provides a user-friendly web interface for inputting accident parameters and getting real-time severity predictions.
--   **Model Persistence:** The trained model is saved for easy loading and deployment, eliminating the need for retraining.
--   **Hyperparameter Optimization:** Employs `RandomizedSearchCV` for efficient and effective tuning of the Random Forest model's hyperparameters.
+This project focuses on developing a predictive model to identify the severity of road traffic accidents. By leveraging historical accident data and various contributing factors, the goal is to build an accurate and reliable accident severity prediction system. The project utilizes the Random Forest Classifier algorithm and provides an interactive Streamlit web application to demonstrate its capabilities.
 
 ## Dataset
 
-The project utilizes the `Accident-Data.csv` dataset, which contains various features related to road accidents. Due to its size (~188 MB), the dataset is managed using Git Large File Storage (Git LFS) in this repository.
+The project utilizes the "Accident-Data.csv" dataset, which contains information about road traffic accidents, including various features related to accident circumstances and severity. Due to its size (approximately 188 MB), the dataset is managed using Git Large File Storage (Git LFS).
 
--   **File Name:** `Accident-Data.csv`
--   **Size:** Approximately 188 MB
--   **Contents:** Includes columns related to accident time, location, weather, road conditions, vehicle types, and the target variable (accident severity).
+## Key Features
 
-## Model & Methodology
+* **Data Preprocessing:** Handling missing values, encoding categorical features, and scaling numerical features.
+* **Robust Model with Hyperparameter Tuning:** Implementation of the Random Forest Classifier, optimized using RandomizedSearchCV to find a good combination of hyperparameters for improved performance.
+* **Performance Evaluation:** Thorough evaluation of the model's predictive accuracy using metrics such as accuracy, precision, recall, and F1-score.
+* **Interactive Web Application:** A Streamlit application allows users to input accident parameters and receive severity predictions.
+* **Model Persistence:** The trained Random Forest model is saved for easy loading and use.
 
-The core predictive model is a **Random Forest Classifier**.
+## Technologies Used
 
-The machine learning pipeline involves the following key steps:
-1.  **Data Loading & Preprocessing:** Handling missing values, encoding categorical features, and scaling numerical features.
-2.  **Exploratory Data Analysis (EDA):** Understanding feature distributions and relationships with accident severity. (Details in `Accident-Severity-Predictor.ipynb`)
-3.  **Model Training:** Training a `RandomForestClassifier` on the preprocessed data.
-4.  **Hyperparameter Tuning:** Efficiently optimizing the model's hyperparameters (e.g., `n_estimators`, `max_depth`, `min_samples_split`, `max_features`) using `sklearn.model_selection.RandomizedSearchCV` with 5-fold cross-validation. This ensures a robust and high-performing model.
-5.  **Model Persistence:** The best performing model (`best_rf.joblib`) and the list of features used (`feature_columns.json`) are saved for direct use in the Streamlit application.
+* **Python:** Programming language used for the entire project.
+* **Pandas:** For data manipulation and analysis.
+* **Scikit-learn (sklearn):** For data splitting, preprocessing, model implementation (Random Forest Classifier), and evaluation metrics.
+* **Streamlit:** For creating the interactive web application.
 
-## Evaluation Results
+## Setup and Installation
 
-The Random Forest Classifier demonstrated strong predictive capabilities on the unseen validation set.
+1.  **Clone the repository:**
+
+    ```bash
+    git clone [https://github.com/Abhinav-Marlingaplar/Accident-Severity-Predictor.git](https://github.com/Abhinav-Marlingaplar/Accident-Severity-Predictor.git)
+    cd Accident-Severity-Predictor
+    ```
+
+2.  **Install required libraries manually:**
+
+    This project relies on the following Python libraries. Please ensure you have them installed in your environment. You can install them using pip:
+
+    ```bash
+    pip install pandas scikit-learn streamlit
+    ```
+
+## Usage
+
+1.  **Ensure the data is available:** The  `Accident-Data.csv`  file should be present in the main directory.  If you have cloned the repository with Git LFS properly configured, this file will be downloaded automatically.
+
+2.  **Run the Streamlit application:**
+
+    ```bash
+    streamlit run app.py
+    ```
+
+    The Streamlit application will open in your default web browser.  You can then interact with the application to get accident severity predictions.
+
+## Results
+
+The Random Forest Classifier model demonstrated strong predictive capabilities on the unseen validation set.
 
 **Validation Set Performance:**
 
@@ -62,76 +69,14 @@ The Random Forest Classifier demonstrated strong predictive capabilities on the 
 | 3              | 0.71      | 0.71   | 0.71     | 855     |
 | 4              | 0.69      | 0.81   | 0.74     | 855     |
 
-**Overall Accuracy:** `0.747`
+**Overall Accuracy:** 0.747
 
-The model exhibits high accuracy, particularly for the most frequent severity class (Class 1). While there's room for improvement in predicting less frequent classes (2, 3, 4), the overall performance provides a solid foundation for practical application.
-
-## Project Structure
-Accident_Severity_Predictor/
-├── model/
-│   ├── best_rf.joblib             # Trained Random Forest model
-│   └── feature_columns.json       # List of feature columns used by the model
-├── Accident-Data.csv              # The dataset used for training (LFS-tracked)
-├── Accident-Severity-Predictor.ipynb # Jupyter Notebook with EDA, training, and evaluation
-├── app.py                         # Streamlit web application
-└── requirements.txt               # Python dependencies
-
-## How to Run Locally
-
-To set up and run this project on your local machine, follow these steps:
-
-1.  **Clone the Repository:**
-    ```bash
-    git clone [https://github.com/Abhinav-Marlingaplar/Accident-Severity-Predictor.git](https://github.com/Abhinav-Marlingaplar/Accident-Severity-Predictor.git)
-    cd Accident_Severity_Predictor
-    ```
-    *Note: Ensure Git LFS is installed (`git lfs install`) before cloning to correctly download `Accident-Data.csv`.*
-
-2.  **Create a Virtual Environment (Recommended):**
-    ```bash
-    python -m venv venv
-    # On Windows:
-    # venv\Scripts\activate
-    # On macOS/Linux:
-    source venv/bin/activate
-    ```
-
-3.  **Install Dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4.  **Run the Streamlit Application:**
-    ```bash
-    streamlit run app.py
-    ```
-    This command will open the Streamlit application in your web browser, typically at `http://localhost:8501`.
-
-## Live Demo (Optional - Add Link Here)
-
-*(Once you deploy your Streamlit app to Streamlit Community Cloud or another platform, you can add a link here like this:)*
-
-Experience the live application here: [https://your-streamlit-app-url.streamlit.app/](https://your-streamlit-app-url.streamlit.app/)
-
-## Future Enhancements
-
--   **Advanced Feature Engineering:** Explore more complex feature interactions and derivations from the existing dataset.
--   **Handling Class Imbalance:** Implement techniques like SMOTE, ADASYN, or use custom loss functions to improve prediction for minority severity classes.
--   **Model Interpretability:** Employ tools like SHAP or LIME to explain individual predictions and gain deeper insights into feature importance.
--   **Real-time Data Integration:** Explore possibilities of integrating with real-time traffic or weather data sources.
--   **Deployment Optimization:** Further optimize the Streamlit application for faster loading and scalability.
-
-## Contributing
-
-Contributions are welcome! If you have suggestions for improvements, feature additions, or bug fixes, please feel free to open an issue or submit a pull request.
+The model exhibits high accuracy, particularly for the most frequent severity class (Class 1).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details (if you create one).
+This project is licensed under the MIT License. See the  `LICENSE`  file for more details.
 
-## Contact
+## Author
 
-For any questions or inquiries, please feel free to reach out:
-
--   **Abhinav Marlingaplar**
--   GitHub: [Abhinav-Marlingaplar](https://github.com/Abhinav-Marlingaplar)
+Abhinav Marlingaplar

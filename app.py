@@ -114,7 +114,7 @@ st.title("⚠️ Accident Severity Predictor")
 st.markdown("Fill out the form below to predict potential accident severity.")
 
 # Use st.form to group all input widgets
-with st.form("accident_prediction_form", clear_on_submit=False): # changed clear_on_submit to False
+with st.form("accident_prediction_form", clear_on_submit=False): # Changed to False to prevent reset
     st.subheader("Location")
     col1, col2 = st.columns(2)
     with col1:

@@ -57,16 +57,18 @@ The project utilizes the "Accident-Data.csv" dataset, which contains information
 
     The Streamlit application will open in your default web browser.  You can then interact with the application to get accident severity predictions.
 
-### Visualizations of the data distribution
+### Sample Images of Streamlit Application
 
-**Feature Distribution Plot**
-<p align="center">
-<img src="images/feature_distribution.png" alt="Feature Distribution" width="400"/>
+<p align="left">
+<img src="images/img2.png" alt="moderate risk" width="400"/>
 </p>
 
-**Correlation Heatmap**
 <p align="center">
-<img src="images/correlation_heatmap.png" alt="Correlation Heatmap" width="400"/>
+<img src="images/img1.png" alt="no risk" width="400"/>
+</p>
+
+<p align="right">
+<img src="images/img3.png" alt="high risk" width="400"/>
 </p>
 
 ## Results

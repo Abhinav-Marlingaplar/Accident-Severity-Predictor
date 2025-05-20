@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+.venv/
+.ipynb_checkpoints/
+
+# IDEs and OS
+.idea/
+.vscode/
+.DS_Store
+
+# Streamlit specific (if any local cache/config)
+.streamlit/
+streamlit_data/
+
+# Jupyter Notebook specific (if not desired)
+# Accident-Severity-Predictor.ipynb # Uncomment if you DON'T want to upload the notebook

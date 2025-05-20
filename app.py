@@ -93,60 +93,74 @@ st.set_page_config(
     layout="centered"
 )
 
-
+# Initialize session state
+if 'input_data' not in st.session_state:
+    st.session_state.input_data = {
+        "Temperature(C)": 25.0,
+        "start_lat": 34.0,
+        "start_lng": -118.0,
+        "end_lat": 34.0,
+        "end_lng": -118.0,
+        "Traffic_Signal": False,
+        "Crossing": False,
+        "Year": 2023,
+        "Month": 1,
+        "Day": 1,
+        "Hour": 12,
+    }
 
 # --- Streamlit App ---
 st.title("⚠️ Accident Severity Predictor")
 st.markdown("Fill out the form below to predict potential accident severity.")
 
 # Use st.form to group all input widgets
-with st.form("accident_prediction_form", clear_on_submit=True):
+with st.form("accident_prediction_form", clear_on_submit=False): # changed clear_on_submit to False
     st.subheader("Location")
     col1, col2 = st.columns(2)
     with col1:
-        start_lat = st.number_input(
+        st.session_state.input_data["start_lat"] = st.number_input(
             "Start Latitude",
-            min_value=-90.0, max_value=90.0, value=34.0, step=0.0001, format="%.4f",
+            min_value=-90.0, max_value=90.0, value=st.session_state.input_data["start_lat"], step=0.0001, format="%.4f",
             help="Geographic latitude of the accident start point."
         )
-        start_lng = st.number_input(
+        st.session_state.input_data["start_lng"] = st.number_input(
             "Start Longitude",
-            min_value=-180.0, max_value=180.0, value=-118.0, step=0.0001, format="%.4f",
+            min_value=-180.0, max_value=180.0, value=st.session_state.input_data["start_lng"], step=0.0001, format="%.4f",
             help="Geographic longitude of the accident start point."
         )
         end_lat_default = 34.0
         end_lng_default = -118.0
         end_lat_input = st.number_input(
             "End Latitude (Optional)",
-            min_value=-90.0, max_value=90.0, value=end_lat_default, step=0.0001, format="%.4f",
+            min_value=-90.0, max_value=90.0, value=st.session_state.input_data["end_lat"] if st.session_state.input_data["end_lat"] != end_lat_default else end_lat_default, step=0.0001, format="%.4f",
             help="Geographic latitude of the accident end point. Defaults to Start Lat if left unchanged."
         )
         end_lng_input = st.number_input(
             "End Longitude (Optional)",
-            min_value=-180.0, max_value=180.0, value=end_lng_default, step=0.0001, format="%.4f",
+            min_value=-180.0, max_value=180.0, value=st.session_state.input_data["end_lng"] if st.session_state.input_data["end_lng"] != end_lng_default else end_lng_default, step=0.0001, format="%.4f",
             help="Geographic longitude of the accident end point. Defaults to Start Lng if left unchanged."
         )
 
-        end_lat = end_lat_input if end_lat_input != end_lat_default else None
-        end_lng = end_lng_input if end_lng_input != end_lng_default else None
+        st.session_state.input_data["end_lat"] = end_lat_input if end_lat_input != end_lat_default else None
+        st.session_state.input_data["end_lng"] = end_lng_input if end_lng_input != end_lng_default else None
 
     with col2:
         st.subheader("Time and Conditions")
-        Year = st.number_input("Year", min_value=2000, max_value=2025, value=2023, step=1, help="Year of the accident")
-        Month = st.number_input("Month", min_value=1, max_value=12, value=1, step=1, help="Month of the accident (1-12)")
-        Day = st.number_input("Day", min_value=1, max_value=31, value=1, step=1, help="Day of the accident (1-31)")
-        Hour = st.number_input("Hour", min_value=0, max_value=23, value=12, step=1, help="Hour of the accident (0-23)")
+        st.session_state.input_data["Year"] = st.number_input("Year", min_value=2000, max_value=2025, value=st.session_state.input_data["Year"], step=1, help="Year of the accident")
+        st.session_state.input_data["Month"] = st.number_input("Month", min_value=1, max_value=12, value=st.session_state.input_data["Month"], step=1, help="Month of the accident (1-12)")
+        st.session_state.input_data["Day"] = st.number_input("Day", min_value=1, max_value=31, value=st.session_state.input_data["Day"], step=1, help="Day of the accident (1-31)")
+        st.session_state.input_data["Hour"] = st.number_input("Hour", min_value=0, max_value=23, value=st.session_state.input_data["Hour"], step=1, help="Hour of the accident (0-23)")
 
-        TemperatureC = st.slider(
+        st.session_state.input_data["Temperature(C)"] = st.slider(
             "Temperature (°C)",
             min_value=-30.0,
             max_value=60.0,
-            value=25.0,
+            value=st.session_state.input_data["Temperature(C)"],
             step=0.5,
             help="Temperature in Celsius at the time of accident."
         )
-        Traffic_Signal = st.checkbox("Traffic Signal Present?", value=False)
-        Crossing = st.checkbox("Crossing Present?", value=False)
+        st.session_state.input_data["Traffic_Signal"] = st.checkbox("Traffic Signal Present?", value=st.session_state.input_data["Traffic_Signal"])
+        st.session_state.input_data["Crossing"] = st.checkbox("Crossing Present?", value=st.session_state.input_data["Crossing"], value=False)
 
     # Every form must have a submit button.
     submitted = st.form_submit_button("Predict Severity")
@@ -155,17 +169,17 @@ with st.form("accident_prediction_form", clear_on_submit=True):
 if submitted:
     # Prepare data for prediction
     raw_input_data = {
-        "Temperature(C)": TemperatureC,
-        "start_lat": start_lat,
-        "start_lng": start_lng,
-        "end_lat": end_lat,
-        "end_lng": end_lng,
-        "Traffic_Signal": Traffic_Signal,
-        "Crossing": Crossing,
-        "Year": Year,
-        "Month": Month,
-        "Day": Day,
-        "Hour": Hour,
+        "Temperature(C)": st.session_state.input_data["Temperature(C)"],
+        "start_lat": st.session_state.input_data["start_lat"],
+        "start_lng": st.session_state.input_data["start_lng"],
+        "end_lat": st.session_state.input_data["end_lat"],
+        "end_lng": st.session_state.input_data["end_lng"],
+        "Traffic_Signal": st.session_state.input_data["Traffic_Signal"],
+        "Crossing": st.session_state.input_data["Crossing"],
+        "Year": st.session_state.input_data["Year"],
+        "Month": st.session_state.input_data["Month"],
+        "Day": st.session_state.input_data["Day"],
+        "Hour": st.session_state.input_data["Hour"],
     }
 
     try:
@@ -193,4 +207,4 @@ if submitted:
         st.error(f"An unexpected error occurred during prediction: {e}")
 
 st.markdown("---")
-st.markdown("Application Build By Abhinav Marlingaplar.")
+st.markdown("Built with ❤️ using Streamlit.")

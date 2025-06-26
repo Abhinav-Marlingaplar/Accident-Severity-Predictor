@@ -114,7 +114,7 @@ st.title("⚠️ Accident Severity Predictor")
 st.markdown("Fill out the form below to predict potential accident severity.")
 
 # Use st.form to group all input widgets
-with st.form("accident_prediction_form", clear_on_submit=False): # changed clear_on_submit to False
+with st.form("accident_prediction_form", clear_on_submit=False): # Changed to False to prevent reset
     st.subheader("Location")
     col1, col2 = st.columns(2)
     with col1:
@@ -160,7 +160,7 @@ with st.form("accident_prediction_form", clear_on_submit=False): # changed clear
             help="Temperature in Celsius at the time of accident."
         )
         st.session_state.input_data["Traffic_Signal"] = st.checkbox("Traffic Signal Present?", value=st.session_state.input_data["Traffic_Signal"])
-        st.session_state.input_data["Crossing"] = st.checkbox("Crossing Present?", value=st.session_state.input_data["Crossing"], value=False)
+        st.session_state.input_data["Crossing"] = st.checkbox("Crossing Present?", value=st.session_state.input_data["Crossing"]) # Corrected line
 
     # Every form must have a submit button.
     submitted = st.form_submit_button("Predict Severity")
@@ -207,4 +207,4 @@ if submitted:
         st.error(f"An unexpected error occurred during prediction: {e}")
 
 st.markdown("---")
-st.markdown("Built with ❤️ using Streamlit.")
+st.markdown("App built by Abhinav Marlingaplar.")
